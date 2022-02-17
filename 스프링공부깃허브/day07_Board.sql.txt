@@ -1,0 +1,37 @@
+select * from tab; --현재 계정의 테이블 목록 출력
+
+create sequence board_seq
+    start with 1
+    maxvalue 999999999
+    increment by 1
+    nocycle
+    nocache;
+
+create table board (
+    idx 		number 			default board_seq.nextval primary key,
+    title		varchar2(100)	not null,
+    writer		varchar2(50)	not null,
+    content		varchar2(2000)	not null,
+    writeDate	date			default sysdate,
+    viewCount	number			default 0				
+);
+
+desc board;     -- 테이블의 구조를 간단하게 묘사해라
+
+-- 더미 데이터 작성, 이후 insert 쿼리를 수행할 때 이 형식을 참조하여 작성한다
+insert into board (title, writer, content) values ('제목1', '테스트1', '내용1');
+insert into board (title, writer, content) values ('제목2', '테스트1', '내용2');
+insert into board (title, writer, content) values ('제목3', '테스트1', '내용3');
+insert into board (title, writer, content) values ('제목4', '테스트1', '내용4');
+
+-- 게시글 목록 불러오기
+select * from board     -- board 테이블의 모든 컬럼값을 불러온다
+    order by idx desc;  -- idx 컬럼을 기준으로 내림차순으로 정렬한다
+    
+-- commit을 수행하여 현재 상태를 DB에 반영한다
+commit;
+
+
+
+
+

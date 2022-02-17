@@ -1,0 +1,24 @@
+form[method="POST"] table > tbody > tr {
+		border: 0;
+	}
+	form[method="POST"] table > tbody > tr > th {
+		text-align: left;
+	}
+	form[method="POST"] input[type="text"] {
+		all: unset;
+		padding: 10px;
+		font-size: 18px;
+		border: 0;
+		width: 50%;
+		border-bottom: 2px solid black;
+	}
+	form[method="POST"] textarea {
+		min-height: 500px;
+		width: 100%;
+		resize: none;
+		box-sizing: border-box;
+		padding: 20px;
+		font-family: '나눔고딕';
+		font-size: 17px;
+		margin: 20px auto;
+	}

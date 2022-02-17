@@ -1,0 +1,64 @@
+rm -rf /etc/sysconfig/network-scripts/ifcfg-ens33
+
+echo "DEVICE=ens33" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "BOOTPROTO=static" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "IPADDR=192.168.1.100" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "NETMASK=255.255.255.0" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "GATEWAY=192.168.1.2" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "ONBOOT=yes" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "DNS1=168.126.63.1" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+echo "DNS2=8.8.8.8" >> /etc/sysconfig/network-scripts/ifcfg-ens33
+
+service network restart
+ifconfig | head -2
+ping 192.168.1.2 -c 2
+ping 8.8.8.8 -c 2
+ping google.com -c 2
+
+--------------------------------------------------------------------------
+yum install java-1.8.0-openjdk-devel.x86_64 -y && javac -version
+
+curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
+
+yum -y localinstall oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
+
+wget https://download.oracle.com/otn-pub/otn_software/db-express/oracle-database-xe-18c-1.0-1.x86_64.rpm
+
+yum -y localinstall oracle-database-xe-18c-1.0-1.x86_64.rpm 
+
+service oracle-xe-18c configure 
+
+--------------------------------------------------------------------------
+firewall-cmd --permanent --zone=public --add-port=1521/tcp
+firewall-cmd --reload
+firewall-cmd --list-all
+
+rm -rf /home/oracle/prepareAccount.sql
+echo "create user c##itbank identified by it;" >> /home/oracle/prepareAccount.sql
+echo "grant connect, resource, dba to c##itbank;" >> /home/oracle/prepareAccount.sql
+echo "alter session set container=XEPDB1;" >> /home/oracle/prepareAccount.sql
+echo "alter user hr account unlock;" >> /home/oracle/prepareAccount.sql
+echo "alter user hr identified by hr;" >> /home/oracle/prepareAccount.sql
+echo "grant create session to hr;" >> /home/oracle/prepareAccount.sql
+echo "grant connect, resource to hr;" >> /home/oracle/prepareAccount.sql
+echo "commit;" >> /home/oracle/prepareAccount.sql
+echo "" >> /home/oracle/.bash_profile
+echo "### 오라클 실행 환경 변수 설정 ###" >> /home/oracle/.bash_profile
+echo "export ORACLE_HOME=/opt/oracle/product/18c/dbhomeXE" >> /home/oracle/.bash_profile
+echo "export ORACLE_SID=XE" >> /home/oracle/.bash_profile
+echo "export ORAENV_ASK=NO" >> /home/oracle/.bash_profile
+echo "export NLS_LANG=AMERICAN_AMERICA.AL32UTF8" >> /home/oracle/.bash_profile
+echo "export PATH=.:$ORACLE_HOME/bin:$PATH" >> /home/oracle/.bash_profile
+echo oracle | passwd --stdin oracle
+
+su - oracle
+. oraenv
+sqlplus sys/oracle@//localhost:1521/XE as sysdba < /home/oracle/prepareAccount.sql
+
+exit
+
+sed -i '7s/enforcing/disabled/' /etc/selinux/config
+systemctl enable oracle-xe-18c.service && init 6
+
+
+--------------------------------------------------------------------------

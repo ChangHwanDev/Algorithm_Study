@@ -1,0 +1,47 @@
+day04_ DB Install
+
+1) Web Server에 DB를 같이 설치하면
+   서버가 받는 부하가 증가할 수 있다
+
+2) 간단한 형태라도 Linux를 체험해보면 좋음
+
+3) 포트 중첩 문제 회피
+   Tomcat 	: 8080
+   Oracle	: 1521
+   Oracle Web	: 8080
+
+http://221.164.9.222
+ID : itbank
+PW : it
+
+1) VMware 프로그램이 설치되어 있지 않다면 설치
+
+2) VM_Compress/OracleLinux7.zip 다운로드
+
+3) 압축 해제 후 .vmx 파일을 찾아서 실행
+
+4) 메뉴 - Edit - Virtual Network Editor
+   Change Setting - VMnet 8 
+   Subnet : 192.168.1.0
+   하단의 체크박스 둘다 체크되어 있는 상태
+
+5) 컴퓨터 부팅 - I copied It
+
+6) 목록에 없습니까? root / 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
