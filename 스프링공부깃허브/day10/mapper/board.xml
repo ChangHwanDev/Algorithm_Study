@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	인터페이스 매퍼 자동 주입을 사용하고 있다면 (mybatis-spring:scan)
+	namespace : 패키지.인터페이스
+	id : 인터페이스의 함수이름 (인터페이스DAO에서는 자바 메서드 오버로딩을 사용하지 않는다)
+	parameterType : 매개변수 자료형
+	resultType : 반환값 자료형
+ -->
+ 	<!-- 
+		#{value} : value 의 자료형에 맞춰서 따옴표 혹은 형식 처리를 자동으로 수행한다
+		${value} : value 의 자료형에 상관없이 글자만 그대로 쿼리문에 포함시킨다
+	 -->
+<mapper namespace="com.itbank.board.BoardDAO">
+	<select id="selectBoardList" resultType="com.itbank.board.BoardDTO" parameterType="hashmap">
+		
+		select * from board
+		<if test="search != null and !type.equals('')">
+			where ${type} like '%${search}%'
+			 </if>
+			 order by idx desc
+			 offset #{offset} rows
+			 fetch first #{perPage} rows only
+	</select>
+	<select id="selectPageCount" resultType="int" parameterType="hashmap" >
+	select ceil (
+	(select count(*) from board  
+	<if test="search != null and !type.equals('')">
+	 where ${type} like '%${search}%'
+	 </if>
+	 ) / #{perPage}) from dual
+	</select>
+
+</mapper>
+
