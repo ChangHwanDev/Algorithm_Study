@@ -1,113 +1,86 @@
 package Datastructure;
 
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
-class Main {
-	static int n; // 후보자 수
-	static int v; // 전체 표 수
-	static ArrayList<Candidate> cds; // 남아있는 후보들
-
+public class Main {
 	public static void main(String[] args) {
+
 		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
-		v = 0;
-		cds = new ArrayList<Candidate>();
-		String vp = "";
-		for (int i = 0; i < n; i++) {
-			vp = sc.nextLine();
-			cds.add(new Candidate(vp, i + 1));
+
+		int n = sc.nextInt();
+		int i, j, vnum, count, a = 0, k;
+
+		String candidate[] = new String[n + 1];
+		int total[] = new int[n + 1];
+		int[][] vote = new int[1000][n];
+		
+		for (i = 0; i < n + 1; i++) {
+			candidate[i] = sc.nextLine();
 		}
-		while ((vp = sc.nextLine()) != null && vp.length() != 0) {
-			Vote vote = new Vote();
-			StringTokenizer st = new StringTokenizer(vp, " ");
-			int tmp;
-			while (st.hasMoreTokens()) {
-				tmp = Integer.parseInt(st.nextToken());
-				vote.votes.offer(tmp);
+		System.out.println("0 입력시 투표종료");
+		for (i = 0; i <= n; i++)
+			total[i] = 0;
+
+		Loop1: for (i = 0; i < 1000; i++)
+			for (j = 0; j < n; j++) {
+				vote[i][j] = sc.nextInt();
+				if (vote[i][j] == 0)
+					break Loop1;
 			}
-			add_vote(vote);
-			v++;
-		}
 
-		// '한 후보가 절반이 넘는 표를 얻거나 모든 후보가 동점'이 아닐 경우
-		while (!majority() && !tie_case()) {
-			// 후보 탈락 처리, 표 더해주기
-			Collections.sort(cds);
+		vnum = i + 1;
 
-		}
+		for (i = 0; i < vnum; i++)
+			total[vote[i][0]]++;
 
-		// 당선자
-		Iterator<Candidate> itc = cds.iterator();
-		while (itc.hasNext()) {
-			Candidate c = itc.next();
-			System.out.println(c.name);
-		}
-	}
 
-	// 투표용지를 해당 후보에 추가시킴
-	static void add_vote(Vote vote) {
-		int cnum = vote.votes.poll();
-		Iterator<Candidate> itc = cds.iterator();
-		while (itc.hasNext()) {
-			Candidate c = itc.next();
-			if (c.cnum == cnum) {
-				c.vote.add(vote);
-				break;
+		Loop2: for (k = 1; k < n + 1; k++) {
+			a = getWinner(total, vnum);
+			if (a >= 1) {
+				System.out.println("\n승자는 = " + candidate[a]);
+				break Loop2;
+			}  else {
+				Reset(total, vote, vnum);
+				a = getWinner(total, vnum);
 			}
 		}
 	}
 
-	// 과반수 검사
-	static boolean majority() {
-		Iterator<Candidate> itc = cds.iterator();
-		while (itc.hasNext()) {
-			Candidate c = itc.next();
-			if (c.vote.size() > v / 2) {
-				cds.clear();
-				cds.add(c);
-				return true;
+	static int getWinner(int total[], int vnum) {
+		int i, j, k = 0;
+		k++;
+		int n = vnum - 1, max = 0, count = 0, min = total[1];
+		float half = (float) n / 2;
+		for (i = 1; i <= total.length - 1; i++)
+			if (total[i] > max) {
+				max = total[i];
+				count = i;
+				if (max > half) {
+					return count;
+				} else
+					return -1;
+			} else if (k == total.length - 1)
+				return 0;
+		return -1;
+	}
+
+	static void Reset(int total[], int vote[][], int vnum) {
+		int n = total.length - 1, min = total[0];
+		int j = 0;
+		j++;
+		for (int i = 0; i <= n; i++) {
+			if (min > total[i])
+				min = total[i];
+		}
+		for (int i = 1; i <= n; i++)
+			if (total[i] == min)
+				total[i] = 0;
+
+		for (int i = 0; i < vnum - 1; i++) {
+			if (total[vote[i][0]] != 0) {
+				vote[i][0] = vote[i][j];
+				total[vote[i][0]]++;
 			}
 		}
-		return false;
-	}
-
-	// 후보의 표가 동점인지 검사
-	static boolean tie_case() {
-		Iterator<Candidate> itc = cds.iterator();
-		Candidate c = itc.next();
-		int vnum = c.vote.size();
-		while (itc.hasNext()) {
-			c = itc.next();
-			if (c.vote.size() != vnum)
-				return false;
-		}
-
-		return true;
-	}
-}
-
-class Candidate implements Comparable<Candidate> {
-	String name; // 이름
-	int cnum; // 후보번호
-	ArrayList<Vote> vote; // 가지고 있는 투표용지 수
-
-	public Candidate(String name, int cnum) {
-		this.name = name;
-		this.cnum = cnum;
-		vote = new ArrayList<Vote>();
-	}
-
-	public int compareTo(Candidate c) {
-		return this.vote.size() < c.vote.size() ? -1 : (this.vote.size() == c.vote.size() ? 0 : 1);
-	}
-}
-
-//투표용지
-class Vote {
-	Queue<Integer> votes;
-
-	public Vote() {
-		votes = new LinkedList<Integer>();
 	}
 }
