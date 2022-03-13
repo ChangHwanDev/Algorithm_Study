@@ -1,21 +1,19 @@
 package baekjoon;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) {
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
+		Scanner sc = new Scanner(System.in);
 
-		int arr [] = new int[]{1,2};
-		for(int i=0;i<2;i++) {
-			System.out.println(arr[i]);
-		}
+			int h = sc.nextInt();
+			int w = sc.nextInt();
+			int arr[][] = new int[w][h];
+			int r = sc.nextInt();
+			
+			호수=(r/h)+((r%h))//몫은 w값 나머지는 호수
+		
+	
 	}
 }
