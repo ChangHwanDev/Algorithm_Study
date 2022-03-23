@@ -1,0 +1,13 @@
+class Solution {
+    public boolean solution(String s) {
+        boolean answer=true;
+        if(s.length() <4 || s.length() >6 || s.length() == 5)
+            answer=false;
+     try{int a = Integer.parseInt(s);
+        }
+        catch(Exception e){
+            answer=false;
+        }
+        return answer;
+    }
+}
