@@ -1,0 +1,28 @@
+import java.util.*;
+class Solution {
+    public int[] solution(int[] answers) {
+        int[] answer = {};
+        int a[]={1,2,3,4,5};
+        int b[]={2,1,2,3,2,4,2,5};
+        int c[]={3,3,1,1,2,2,4,4,5,5};
+        int anum=0;
+        int bnum=0;
+        int cnum=0;
+        for(int i=0;i<answers.length;i++){
+        if(answers[i] ==  a[i%a.length])anum++;
+            if(answers[i] ==  b[i%b.length])bnum++;
+            if(answers[i] ==  c[i%c.length])cnum++;
+            
+        }
+        int max = Math.max(anum,Math.max(bnum,cnum));
+        ArrayList<Integer> list = new ArrayList<>();
+        if(max == anum) list.add(1);
+        if(max == bnum) list.add(2);
+        if(max == cnum) list.add(3);
+        answer = new int[list.size()];
+        for(int i=0;i<list.size();i++){
+            answer[i] = list.get(i);
+        }
+        return answer;
+    }
+}
