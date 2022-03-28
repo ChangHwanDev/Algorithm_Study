@@ -1,0 +1,11 @@
+import java.util.Calendar;
+class Solution {
+    public String solution(int a, int b) {
+        Calendar c = Calendar.getInstance();
+        c.set(2016,a-1, b);
+        String[] answer ={"SUN", "MON","TUE","WED", "THU", "FRI", "SAT"};
+        
+        int weekday = c.get(Calendar.DAY_OF_WEEK);
+        return answer[weekday-1];
+    }
+}
