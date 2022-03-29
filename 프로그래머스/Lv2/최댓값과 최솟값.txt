@@ -1,0 +1,3 @@
+def solution(s):
+    params = list(map(int,s.split(" ")))
+    return str(min(params)) + " " + str(max(params))

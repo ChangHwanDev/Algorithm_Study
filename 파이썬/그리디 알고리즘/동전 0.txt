@@ -7,7 +7,7 @@ coin.sort(reverse=True)
 count = 0
 for i in coin:
     if K<=0:
-break
+        break
     elif K>i:
         count += K//i
         K %= i
