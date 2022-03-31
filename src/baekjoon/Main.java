@@ -1,18 +1,21 @@
 package baekjoon;
 
-import java.util.StringTokenizer;
+
 
 public class Main {
 
 	public static void main(String[] args) {
-		String answer = "";
 		String s = "3people unFollowed me";
-		s.toLowerCase();
-		StringTokenizer st = new StringTokenizer(s, " ");
-		while (st.hasMoreTokens()) {
-			answer += st.nextToken();
-			if (!Character.isDigit(answer.charAt(0)))
-				System.out.println(answer.charAt(0));
+		String[] srr = s.toLowerCase().split("");
+		String answer="";
+		answer += srr[0];
+		boolean check = false;
+		for(int i=1;i<srr.length;i++) {
+			check=srr[i-1].equals(" ") ? true : false;
+			if(check)
+				answer+=Character.toUpperCase(s.charAt(i));
+			else
+			answer+=s.charAt(i);
 		}
 		System.out.println(answer);
 	}
