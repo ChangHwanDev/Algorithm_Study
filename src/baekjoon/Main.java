@@ -2,28 +2,33 @@ package baekjoon;
 
 import java.util.Arrays;
 import java.util.Scanner;
- 
+import java.util.StringTokenizer;
+
 public class Main {
- 
+
 	public static void main(String[] args) {
- 
+
 		Scanner in = new Scanner(System.in);
- 
-		int sum = Integer.MAX_VALUE;	// 초기 상태 여부 확인을 위한 값으로 설정 
-		
-		String[] minus = in.nextLine().split("-");
-		for (int i=0;i<minus.length;i++) {
-			int temp =0;
-			String[] plus = minus[i].split("\\+");
-			for(int j=0;j<plus.length;j++) {
-				temp+=Integer.parseInt(plus[j]);
-			}
-			if(sum ==  Integer.MAX_VALUE)
-				sum=temp;
-			else
-				sum-=temp;
+
+		int city = Integer.parseInt(in.nextLine());
+		long[] leng = new long[city - 1];
+		long[] price = new long[city];
+		long sum = 0;
+
+		for (int i = 0; i < leng.length; i++) {
+			leng[i] = in.nextLong();
+		}
+
+		for (int i = 0; i < price.length; i++) {
+			price[i] = in.nextLong();
+		}
+		long min = price[0];
+
+		for (int i = 0; i < price.length - 1; i++) {
+			if (min > price[i])
+				min = price[i];
+			sum += (min * leng[i]);
 		}
 		System.out.println(sum);
 	}
- 
 }
