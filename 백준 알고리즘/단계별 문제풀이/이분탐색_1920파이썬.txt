@@ -1,0 +1,24 @@
+n = int(input())
+nlist = list(map(int,input().split()))
+nlist.sort()
+m = int(input())
+mlist = list(map(int,input().split()))
+
+def binary(mlist):
+  left = 0
+  right = n -1
+
+  while left <= right:
+    mid = (left+right) // 2
+    if nlist[mid] == mlist:
+      return True
+    if mlist < nlist[mid]:
+      right = mid -1
+    elif mlist > nlist[mid]:
+      left = mid+1
+
+for i in range(m):
+    if binary(mlist[i]):
+      print(1)
+    else:
+      print(0)
