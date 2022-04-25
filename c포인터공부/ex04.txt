@@ -1,0 +1,14 @@
+#include <stdio.h>
+void func(){
+  printf("function\n");
+}
+int main() {
+  void (*ptr)();
+  // ptr이 선언되어 있지 않아서 패스될듯?
+  ptr = &func;
+  // ptr에 func의 주소값을 선언
+  (*ptr)();
+  //function 출력
+  return 0;
+}
+  
