@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main() {
+   int n=4;
+  int* pt = NULL;
+  pt= &n;
+  printf("%d",&n+*pt-*&pt+n);
+  // &n 은 n 의 주소
+  // *앞에 나오면 실제 값을 의미
+  // *&pt 는 pt와 같다
+  // 답 8
+}
+  

@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main() {
+   char *p = "KOREA";
+  printf("%s\n",p); // KOREA
+  printf("%s\n",p+3); // EA
+  printf("%c\n",*p); //K
+  printf("%c\n",*(p+3));//E
+  printf("%c\n",*p+2);
+  // s 일 때는 문자열을 읽는다 p는 주소값이지만 null을 만날때까지 읽어서 KOREA 이다 틀린게 있으면 추후에 수정
+  // c 문자 하나만 읽는다
+  // *p 는 K이지만 K에서 +2 더하면 M
+}
+  
