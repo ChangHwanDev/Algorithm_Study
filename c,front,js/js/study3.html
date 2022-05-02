@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            padding: 0px;
+            width: 4200px;
+
+        }
+
+        ul>li {
+            float: left;
+        }
+    </style>
+    <script>
+        var cnt = 0;
+        window.onload = function () {
+            var ul = document.querySelector('ul');
+            ul.style.marginLeft = '0px';
+            ul.querySelector('li').clondeNode;
+            ul.innerHTML = ul.innerHTML + ul.querySelector('li').outerHTML
+        }
+        function move() {
+            if (cnt++ == 11)
+                cnt = 0;
+            var ul = document.querySelector('ul');
+            ul.style.marginLeft = parseInt(ul.style.marginLeft) - 300 + 'px';
+            if (cnt == 0) { // if(ul.style.marginLeft=='-3600px') 도 가능
+                ul.style.marginLeft = '0px';
+
+            }
+        }
+        setInterval(move, 1000);
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image1" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image2" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image3" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image4" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image5" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image6" /></li>
+        </ul>
+    </div>
+</body>
+
+</html>

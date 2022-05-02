@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 600px;
+            height: 800px;
+            overflow: hidden;
+            margin: 0px auto;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+            padding: 0px;
+            width: 3600px;
+        }
+
+        ul>li,
+        ol>li {
+            float: left;
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image1" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image2" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image3" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image4" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image5" /></li>
+            <li><img src="https://dummyimage.com/600x200/000/fff&text=image6" /></li>
+        </ul>
+        <ol></ol>
+    </div>
+    <script>
+        var ul = document.querySelector('ul');
+        var imgs = ul.querySelectorAll('img');
+        var arr = [];
+        imgs.forEach(function (ele) {
+            arr.push(ele.src);
+        });
+        var cnt = 0;
+        function loopImg2() {
+            ul.innerHTML = '<li><img src="' + arr[cnt] + '"/</li>';
+            if (cnt++ == 5) cnt = 0;
+
+        }
+
+        // function loopImg1() {
+        //     var img = arr.shift();
+        //     ul.innerHTML = '<li><img src="' + img + '"/></li>';
+        //     arr.push(img);
+        //     setTimeout(loopImg1, 1000);
+        // }
+        // loopImg1();
+    </script>
+</body>
+
+</html>
