@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --text-color: #f0f4f5;
+            --background-color: #263343;
+            --accent-color: orange;
+            --icons-color: rgb(152, 187, 201);
+            --bodybackground-color: lightgray;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bodybackground-color);
+            font-family: 'STIX Two Math';
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--background-color);
+            padding: 8px 12px;
+            
+            font-family: 'STIX Two Math';
+        }
+
+        #navbar__menu {
+            list-style: none;
+            display: flex;
+            margin: 0px auto;
+            padding-left: 0;
+        }
+
+        #navbar__menu li {
+            padding: 8px 30px;
+        }
+
+
+
+        #navbar__menu li:hover {
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        #card {
+            width : 300px;
+            height: 300px;
+            background-color: white;
+            margin-left: 100px;
+            margin-top : 50px;
+            border-radius: 20%;
+            display:inline-block;
+        }
+        #card h3{
+            padding-top : 20px;
+            margin-left : 50px;
+        }
+        #card a{
+            color:black;
+        }
+        #content{
+            background-color: white;
+            margin:0px auto;
+            width:800px;
+            height: 1000px;
+            
+        }
+     
+        
+        @media screen and (max-width: 700px) {}
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+
+        <div id="navbar__logo">
+            <a href="index.html">MEMO</a>
+           
+        </div>
+
+        <ul id="navbar__menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="memo.html">Gallery</a></li>
+        </ul>
+</nav>
+<div id="content">
+<table>
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>제목</td>
+            <td>작성</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</body>
+
+</html>
