@@ -1,0 +1,9 @@
+-- 코드를 입력하세요
+# 두번 이상 쓰인 이름, 쓰인 횟수
+# 이름이 없으면 집계 제외,
+# order by name
+SELECT name, count(name) as count
+FROM animal_ins
+group by name
+having count > 1
+order by name
