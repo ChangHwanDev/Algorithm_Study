@@ -21,7 +21,7 @@ public class Main {
         bfs(new Node(n,0));
         System.out.println(min);
     }
-    static class Node {
+    static class Node implements Comparable<Node> {
         int from;
         int count;
 
@@ -29,9 +29,14 @@ public class Main {
             this.from = from;
             this.count = count;
         }
+
+        @Override
+        public int compareTo(Node o) {
+            return this.count - o.count;
+        }
     }
     static void bfs(Node node){
-        Queue<Node> queue = new LinkedList<>();
+        PriorityQueue<Node> queue = new PriorityQueue<>();
         queue.offer(node);
 
         while(!queue.isEmpty()){
