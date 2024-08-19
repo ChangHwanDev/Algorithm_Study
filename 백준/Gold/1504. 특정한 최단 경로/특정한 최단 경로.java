@@ -64,6 +64,8 @@ public class Main {
             Node cur = queue.poll();
             int now = cur.index;
 
+            if (dist[now] < cur.v) continue;
+
             for(Node next : graph[now]){
                 if(dist[next.index] > dist[now] + next.v){
                     dist[next.index] = dist[now] + next.v;
