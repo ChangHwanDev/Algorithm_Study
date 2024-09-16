@@ -10,8 +10,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
         String s = br.readLine();
-        int answer = 0;
-        int pow = 1;
+        long answer = 0;
+        long pow = 1;
         for (int i = 0; i < n; i++) {
             answer += (s.charAt(i) - 96) * pow;
             pow = pow * 31 % 1234567891;
