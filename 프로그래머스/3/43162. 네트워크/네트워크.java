@@ -14,21 +14,21 @@ class Solution {
     static int[] unf;
 
     public int solution(int n, int[][] computers) {
-            unf = new int[n];
-            for (int i = 0; i < n; i++) {
+                       unf = new int[n + 1];
+            for (int i =1; i <= n; i++) {
                 unf[i] = i;
             }
 
             for (int i = 0; i < computers.length; i++) {
                 for (int j = 0; j < computers[i].length; j++) {
                     if (i != j && computers[i][j] == 1) {
-                        union(i, j);
+                        union(i + 1, j + 1);
                     }
                 }
             }
 
             int answer = 0;
-            for (int i = 0; i < n; i++) {
+            for (int i = 1; i <= n; i++) {
                 if(find(i) == i) answer++;
             }
         return answer;
