@@ -1,17 +1,23 @@
 import java.util.*;
 class Solution {
     public String solution(int[] numbers) {
-        String[] results = new String[numbers.length];
-
-        for(int i =0; i < numbers.length; i++){
-            results[i] = String.valueOf(numbers[i]);
+        String[] strNums =  new String[numbers.length];
+        
+        for (int i = 0; i < numbers.length; i++) {
+            strNums[i] = String.valueOf(numbers[i]);
         }
-
-        Arrays.sort(results, (o1, o2) -> (o2 + o1).compareTo(o1 + o2));
         
-        if("0".equals(results[0]))
+        Arrays.sort(strNums, (a ,b) -> (b + a).compareTo(a + b));
+        
+        if (strNums[0].equals("0")) {
             return "0";
+        }
         
-        return String.join("",results);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strNums.length; i++) {
+            sb.append(strNums[i]);
+        }
+        
+        return sb.toString();
     }
 }
