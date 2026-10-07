@@ -55,9 +55,9 @@ Notice that the answer must be a substring, &quot;pwke&quot; is a subsequence an
 | --- | --- |
 | Status | Accepted |
 | Language | Java |
-| Runtime | 170 ms (6.72%) |
-| Memory | 48 MB (26.12%) |
-| Submission ID | 2165369554 |
+| Runtime | 46 ms (68.20%) |
+| Memory | 48.1 MB (26.12%) |
+| Submission ID | 2165374275 |
 
 ---
 
